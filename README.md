@@ -44,17 +44,17 @@ python script.py
 
 ```
 ╔══════════════════════════════════════╗
-║      GITHUB FOLLOWER MANAGER CLI     ║
+║      GITHUB FOLLOWER MANAGER CLI            ║
 ╠══════════════════════════════════════╣
-║  User  : your-username               ║
-║  Token : [OK] Token loaded           ║
+║  User  : your-username                      ║
+║  Token : [OK] Token loaded                  ║
 ╠══════════════════════════════════════╣
-║  1.  View Non-Followers              ║
-║  2.  Auto-Follow Smart Users         ║
-║  3.  Bulk Unfollow                   ║
-║  4.  Manage Ignore List              ║
-║  5.  Setup Account & Token           ║
-║  6.  Exit                            ║
+║  1.  View Non-Followers                     ║
+║  2.  Auto-Follow Smart Users                ║
+║  3.  Bulk Unfollow                          ║
+║  4.  Manage Ignore List                     ║
+║  5.  Setup Account & Token                  ║
+║  6.  Exit                                   ║
 ╚══════════════════════════════════════╝
 ```
 
