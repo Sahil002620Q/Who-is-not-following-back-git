@@ -1,74 +1,42 @@
 # GitHub Follow-Back Manager
 
-<p align="center">
-  <strong>Find who doesn't follow you back. Discover active developers. Clean up your following list — from your terminal.</strong>
-</p>
+A Python command-line tool to manage your GitHub follow network. Find accounts that do not follow you back, discover potentially relevant developers to follow, bulk-unfollow selected accounts, and protect important users with an ignore list.
 
-<p align="center">
-  <img alt="Python" src="https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white">
-  <img alt="GitHub API" src="https://img.shields.io/badge/GitHub-REST%20API-181717?logo=github">
-  <img alt="CLI" src="https://img.shields.io/badge/Interface-CLI-2ea44f">
-</p>
+## Features
 
-A Python command-line tool for understanding and managing your GitHub follow network. See accounts that don't follow you back, preview potential developers to follow, bulk-unfollow selected accounts, and protect important users with an ignore list.
-
-**No web dashboard. No database setup. Just Python and the GitHub API.**
-
-> **Important:** This tool can follow and unfollow accounts on your behalf. Review the preview carefully before confirming an action. It does not guarantee that another user will follow you back.
-
-## ✨ What can it do?
-
-| Feature | What it does |
+| Feature | Description |
 | --- | --- |
-| 🔎 **Find non-followers** | Compare your followers and following lists to identify accounts that don't follow you back. |
-| 🤝 **Discover potential follows** | Score candidate accounts using public activity and follower/following signals, then show a preview before following. |
-| 🧹 **Bulk unfollow** | Preview and unfollow selected non-followers or accounts with more followers than following. |
-| 🛡️ **Ignore list** | Protect specific usernames from the tool's follow/unfollow workflows. |
-| 📊 **Rate-limit awareness** | Show remaining GitHub API calls when available. |
-| 🔐 **Local token setup** | Configure a GitHub token through the interactive menu; the token is saved locally in `.env`. |
+| **View non-followers** | Compare your followers and following lists to find accounts that do not follow you back. |
+| **Smart auto-follow** | Find candidate developers using public profile and recent activity signals. Review the list before following. |
+| **Bulk unfollow** | Review and unfollow non-followers or accounts with more followers than following. |
+| **Ignore list** | Exclude selected usernames from follow and unfollow actions. |
+| **Token setup** | Configure your GitHub username and token from the interactive menu. |
+| **Rate-limit information** | Display remaining API calls when GitHub provides the information. |
 
-## 🚀 Quick start
+> **Important:** Follow and unfollow actions change your GitHub account. Review the preview and confirm carefully. Candidate scoring is heuristic and cannot guarantee that someone will follow you back.
 
-### Requirements
+## Requirements
 
-- Python **3.8 or newer**
+- Python 3.8 or newer
 - A GitHub account
 - A GitHub Personal Access Token for follow/unfollow actions
 
-### 1. Clone the repository
+## Installation
+
+Clone the repository, install the dependencies, and run the script:
 
 ```bash
 git clone https://github.com/Sahil002620Q/Who-is-not-following-back-git.git
 cd Who-is-not-following-back-git
-```
-
-### 2. Install dependencies
-
-```bash
 python -m pip install -r requirements.txt
-```
-
-### 3. Launch
-
-```bash
 python script.py
 ```
 
-On first launch, choose **Option 5 — Setup Account & Token** and follow the prompts.
+If your system uses `python3`, replace `python` with `python3` in the commands above. A virtual environment is optional; if you use one, activate it before installing dependencies.
 
-If you prefer to use a virtual environment, create one with `python -m venv .venv` and activate it before installing the dependencies.
+On the first launch, choose **Option 5 — Setup Account & Token** to configure your account.
 
-## 🔑 Set up your GitHub token
-
-1. Open [GitHub token settings](https://github.com/settings/tokens/new).
-2. Create a token and choose an expiration that works for you.
-3. Grant only the permissions required for following/unfollowing users (the classic token flow labels this `user:follow`).
-4. Generate the token and copy it immediately.
-5. In the application, choose **5 — Setup Account & Token** and paste it when prompted.
-
-The application saves the token in a local `.env` file. **Never share your token or commit `.env` to Git.** If a token is exposed, revoke it in GitHub settings immediately. Without a token, read-only requests may still work within GitHub's lower unauthenticated rate limit, but follow/unfollow actions are unavailable.
-
-## 🧭 Menu guide
+## Menu overview
 
 ```text
 1. View Non-Followers
@@ -79,60 +47,85 @@ The application saves the token in a local `.env` file. **Never share your token
 6. Exit
 ```
 
-### 1 — View Non-Followers
+## How to use
 
-Fetches your followers and following lists, then displays accounts you follow that do not follow you back. Accounts on your ignore list are excluded.
+### 1. View Non-Followers
 
-### 2 — Auto-Follow Smart Users
+Fetches your followers and following lists, then displays accounts you follow that do not follow you back. Usernames on your ignore list are excluded.
 
-Builds a candidate list from accounts followed by some of your followers, filters out accounts you already follow or have ignored, and evaluates public profile/activity signals. It shows a ranked preview and asks for confirmation before following. **This is a heuristic, not a prediction or guarantee.**
+### 2. Auto-Follow Smart Users
 
-### 3 — Bulk Unfollow
+Finds potential accounts by scanning the following lists of some of your followers. It excludes accounts you already follow, ignored usernames, and your own account, then evaluates public profile details and recent activity.
+
+- Candidates are filtered using follower/following signals and recent public activity.
+- The tool scores candidates and shows a preview before taking action.
+- Choose how many accounts to consider for the session.
+- Confirm with `y` to proceed, or press Enter to cancel.
+
+This is a heuristic based on public signals, not a guarantee of a follow-back.
+
+### 3. Bulk Unfollow
 
 Choose one of the available categories:
-- **Non-followers:** accounts you follow that don't follow you back.
+
+- **Non-followers:** accounts you follow that do not follow you back.
 - **High-ratio accounts:** accounts whose follower count is greater than their following count.
 
-The tool displays a preview and asks for confirmation before unfollowing. Use this carefully; bulk actions may be difficult to reverse manually.
+Choose a batch size, review the preview, and confirm before unfollowing. Accounts on your ignore list are excluded.
 
-### 4 — Manage Ignore List
+### 4. Manage Ignore List
 
-Add usernames you want the tool to skip or remove usernames from the list. Use this to protect accounts you always want to keep following.
+Add usernames you want to protect or remove usernames from the list. Ignored accounts are skipped by the tool's follow/unfollow workflows.
 
-### 5 — Setup Account & Token
+### 5. Setup Account & Token
 
-Change your configured GitHub username and set or update your token.
+Use this option to configure or update your GitHub username and Personal Access Token. Follow the prompts in the application.
 
-## 📁 Project structure
+## GitHub token setup
+
+1. Open [GitHub token settings](https://github.com/settings/tokens/new).
+2. Create a token and select an expiration period.
+3. Grant the **`user:follow`** permission required for follow/unfollow actions.
+4. Generate the token and copy it immediately; GitHub will not show it again.
+5. Run the script and choose **Option 5 — Setup Account & Token** to enter the token.
+
+The token is stored locally in a `.env` file and loaded by the application. Without a token, some read-only requests may still work, but they have a lower unauthenticated API limit and follow/unfollow actions are unavailable.
+
+**Keep your token private.** Never paste it into an issue, message, or commit. If it is exposed, revoke it in GitHub settings and create a replacement. Make sure `.env` is listed in `.gitignore`.
+
+## API rate limits
+
+GitHub applies API rate limits. Unauthenticated requests generally have a lower limit than authenticated requests, and the exact remaining quota can vary. The application displays rate-limit information when available. If you reach a limit, wait for it to reset before trying again.
+
+## Project structure
 
 ```text
 Who-is-not-following-back-git/
-├── script.py          # Interactive CLI and menu
-├── api_handler.py     # GitHub API operations
+├── script.py          # CLI menu and workflows
+├── api_handler.py     # GitHub API requests and follow operations
 ├── utils.py           # Configuration, scoring, and display helpers
 ├── requirements.txt   # Python dependencies
-├── config.json        # User settings / ignore list (created or updated locally)
-├── .env                # Local token (created locally; do not commit)
-└── .gitignore          # Files excluded from Git, if configured
+├── config.json        # Local username and ignore-list settings
+├── .env               # Local GitHub token; do not commit
+└── .gitignore         # Git exclusions
 ```
 
-The `.env` and `config.json` files may be created or updated while you use the tool. Keep local secrets out of version control.
+The `.env` and `config.json` files may be created or updated locally while using the tool.
 
-## 🧰 Troubleshooting
+## Troubleshooting
 
-- **`python` not found:** install Python 3.8+ and ensure it is on your PATH; on some systems use `python3`.
-- **Missing module error:** run `python -m pip install -r requirements.txt`.
-- **Token rejected:** create a new token with the needed follow permission and update it through Option 5.
-- **Rate limit reached:** wait until GitHub's limit resets. Authenticated limits depend on the API and token.
-- **No candidates found:** the heuristic may not find suitable accounts for your current network or activity window. Try again later.
+- **Python command not found:** Install Python 3.8+ and ensure it is on your PATH; try `python3` if needed.
+- **Missing module:** Run `python -m pip install -r requirements.txt`.
+- **Token rejected:** Create a token with the required follow permission and update it through Option 5.
+- **Rate limit reached:** Wait for the limit to reset before retrying.
+- **No candidates found:** The current account network or activity signals may not produce suitable candidates. Try again later.
 
-## 🔒 Security notes
+## Security and responsible use
 
-- Keep your token in the local `.env` file; never paste it into an issue, public chat, or commit.
-- Verify that `.env` is listed in `.gitignore` before making commits.
-- Review each preview before confirming follow/unfollow operations.
-- Use this project responsibly and respect GitHub's rules and other users.
+- Keep your token in the local `.env` file and ensure it is ignored by Git.
+- Review every preview before confirming follow/unfollow actions.
+- Use the tool responsibly and respect GitHub's rules and other users.
 
-## 🤝 Contributing
+## Contributing
 
-Suggestions, bug reports, and pull requests are welcome. If you find a bug, open an issue with the steps to reproduce it. **Never include access tokens or other secrets in issues.**
+Bug reports, suggestions, and pull requests are welcome. When reporting a problem, include the steps to reproduce it and remove any tokens or other private information first.
